@@ -12,25 +12,25 @@ module.exports = {
              return person.rows[0]
      },
     getOwnDisks: async (person_id) => {
-        const disks = await pool.query(`SELECT disk.id, disk.name FROM disk 
+        const ownDisks = await pool.query(`SELECT disk.id, disk.name FROM disk 
                                     JOIN takenItem ON  takenItem.diskId = disk.id AND takenItem.ownerId = ${person_id}`)
-        return disks.rows
+        return ownDisks.rows
      },
     getFreeDisks: async (person_id) => {
-        const disks = await pool.query(`SELECT disk.id, disk.name FROM disk 
+        const freeDisks = await pool.query(`SELECT disk.id, disk.name FROM disk 
                        JOIN takenItem ON  takenItem.diskId = disk.id AND takenItem.ownerId != ${person_id} AND takenItem.holderId = takenItem.ownerId `)
-        return disks.rows
+        return freeDisks.rows
      },
     getDisksTakenByPerson: async (person_id) => {
-        const disks = await pool.query(`SELECT disk.id, disk.name FROM disk
+        const disksTakenByPerson = await pool.query(`SELECT disk.id, disk.name FROM disk
                     JOIN takenItem ON  takenItem.diskId = disk.id AND takenItem.ownerId != ${person_id} AND takenItem.holderId = ${person_id}`)
-        return disks.rows
+        return disksTakenByPerson.rows
     },
     getDisksTakenFromPerson: async (person_id) => {
-        const disks = await pool.query(`SELECT disk.id as "diskId", disk.name as "diskName", person.nickname as "personNickname" FROM takenItem  
+        const disksTakenFromPerson = await pool.query(`SELECT disk.id as "diskId", disk.name as "diskName", person.nickname as "personNickname" FROM takenItem  
                                 JOIN disk ON  takenItem.diskId = disk.id AND takenItem.ownerId = ${person_id} AND takenItem.holderId != ${person_id}
                                 JOIN person ON takenItem.holderId = person.id`)
-        return disks.rows
+        return disksTakenFromPerson.rows
     },
     getTakenItem: async (diskId) => {
         const takenItem = await pool.query(`SELECT ownerId, holderId FROM takenItem WHERE diskId = ${diskId}`)
