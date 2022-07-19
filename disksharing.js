@@ -38,7 +38,7 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(port, () => {
-    console.log(`Сервер стартовал на порту ${port}`)
+    console.log(`The server started on port ${port}`)
 })
 
 process.on('uncaughtException', err => {
