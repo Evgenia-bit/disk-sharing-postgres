@@ -1,5 +1,5 @@
+const bcrypt = require('bcrypt')
 const db = require('../db/db')
-const bcrypt = require('bcrypt');
 
 module.exports = {
     authorization: async (req, res) => {
@@ -18,7 +18,6 @@ module.exports = {
             if (!nickname || !password) return res.json({status: 'error', msg: 'Вы не ввели данные'})
             const person = await db.getPerson(nickname)
 
-            if (!person) return res.json({status: 'error', msg: 'Вы ввели неверный ник'})
             const comparePassword = bcrypt.compareSync(password, person.password)
             if (comparePassword) {
                 req.session.person_id = person.id

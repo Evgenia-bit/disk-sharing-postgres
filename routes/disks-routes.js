@@ -1,7 +1,9 @@
 const Router = require('express')
-const router = new Router()
+
 const disksHandlers = require("../handlers/disks-handlers")
 const checkAuth = require("../middleware/checkAuth")
+
+const router = new Router()
 
 router.get('/own-disks', checkAuth, disksHandlers.getListOwnDisks)
 router.get('/free-disks', checkAuth, disksHandlers.getListFreeDisks)

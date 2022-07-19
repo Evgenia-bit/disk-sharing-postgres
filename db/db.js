@@ -1,6 +1,9 @@
+const path = require("path")
+
 const { Pool } = require('pg')
-const path = require("path");
+
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
 const pool = new Pool({connectionString: `postgres://${process.env.POSTGRES_USER}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}:${process.env.POSTGRES_PORT}/${process.env.POSTGRES_DB}`})
 
 module.exports = {
@@ -33,6 +36,10 @@ module.exports = {
         const takenItem = await pool.query(`SELECT ownerId, holderId FROM takenItem WHERE diskId = ${diskId}`)
         return takenItem.rows[0]
     },
-    giveDisk: async (diskId) => await pool.query(`UPDATE takenItem SET holderId = ownerId WHERE diskId = ${diskId}`),
-    takeDisk: async (person_id, diskId) => await pool.query(`UPDATE takenItem SET holderId = ${person_id} WHERE diskId = ${diskId}`)
+    giveDisk: async (diskId) => {
+        return await pool.query(`UPDATE takenItem SET holderId = ownerId WHERE diskId = ${diskId}`)
+    },
+    takeDisk: async (person_id, diskId) => {
+        return await pool.query(`UPDATE takenItem SET holderId = ${person_id} WHERE diskId = ${diskId}`)
+    }
 }

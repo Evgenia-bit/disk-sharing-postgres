@@ -1,6 +1,8 @@
 const Router = require('express')
-const router = new Router()
+
 const authHandlers = require("../handlers/auth-handlers")
+
+const router = new Router()
 
 router.get('/authorization', authHandlers.authorization)
 router.post('/authentication', authHandlers.authentication)

@@ -61,5 +61,5 @@ module.exports = {
         } catch (err) {
             res.json({status: 'error', msg:  'Произошла ошибка: ' + err.message})
         }
-    },
+    }
 }
