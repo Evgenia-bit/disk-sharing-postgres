@@ -4,8 +4,8 @@
   "description": "",
   "main": "disksharing.js",
   "scripts": {
-    "dbinit": "node db-init.js",
-    "test": "node disksharing.js",
+    "prefill": "node db/prefill.js",
+    "start": "node disksharing.js",
     "dev": "nodemon disksharing.js"
   },
   "author": "",
