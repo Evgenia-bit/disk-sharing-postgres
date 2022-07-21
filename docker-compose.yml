@@ -12,6 +12,8 @@ services:
     command: node disksharing.js
     depends_on:
       - postgres
+    environment:
+      - POSTGRES_HOST=postgres
     restart: always
   postgres:
     container_name: postgres
