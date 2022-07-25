@@ -35,7 +35,7 @@ docker-compose up
 
 ```
 npm install
-npm prefill 
+npm run prefill 
 npm run start
 ```
 ### Технологии
